@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>لعبة الثعبان (Snake)</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <h1>لعبة الثعبان (Snake)</h1>
+
+    <div class="hud">
+      <div class="score">النتيجة: <span id="score">0</span></div>
+      <button id="restart">إعادة التشغيل</button>
+    </div>
+
+    <div class="game-area">
+      <canvas id="game" width="400" height="400"></canvas>
+    </div>
+
+    <section class="instructions">
+      <h2>كيفية اللعب</h2>
+      <ul>
+        <li>حرك الثعبان باستعمال مفاتيح الأسهم أو W A S D</li>
+        <li>كل طعام تأكله يزيد طول الثعبان ويمكنك من الحصول على نقاط</li>
+        <li>لا تصطدم بجدار اللعبة أو بجسم الثعبان نفسه</li>
+        <li>اضغط "إعادة التشغيل" لبدء لعبة جديدة</li>
+      </ul>
+    </section>
+
+    <footer>
+      <p>لعبة بسيطة مصنوعة بـ HTML و CSS و JavaScript فقط.</p>
+    </footer>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
