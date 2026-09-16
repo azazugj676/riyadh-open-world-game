@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>محرر/متصفح ملفات المشروع — riyadh-open-world-game</title>
+  <title>رياضة؟ ...</title>
   <style>
     :root { --bg:#0b1020; --panel:#11182d; --panel-2:#0f1628; --border:rgba(255,255,255,.08); --text:#e8eefc; --muted:#91a0c2; --accent:#6ea8fe; --accent-2:#8a5cf6; --bubble-user:linear-gradient(135deg,#6ea8fe,#8a5cf6); --bubble-assistant:#18233d; --shadow:0 20px 60px rgba(0,0,0,.35); }
     *{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:radial-gradient(circle at top,#15203d 0,var(--bg) 45%);color:var(--text)}
@@ -25,36 +25,36 @@
 </head>
 <body>
   <div class="app">
-    <header><h1>محرر الملفات + شات مساعد — riyadh-open-world-game</h1></header>
+    <header><h1>... + ... الرياض-open-world-game</h1></header>
     <main class="layout">
       <section class="panel">
-        <div class="panel-head"><h2>الملفات + المعاينة</h2><div class="actions"><button id="refreshFilesBtn">تحديث الملفات</button></div></div>
+        <div class="panel-head"><h2>... + ...</h2><div class="actions"><button id="refreshFilesBtn">... ...</button></div></div>
         <div class="files-grid">
-          <aside class="sidebar"><div class="status" id="filesStatus" style="padding:12px 14px;">جارٍ تحميل الملفات...</div><ul class="file-list" id="fileList"></ul></aside>
-          <div class="viewer"><div class="meta" id="fileMeta">اختر ملفًا لعرضه.</div><pre><code id="codeView"></code></pre></div>
+          <aside class="sidebar"><div class="status" id="filesStatus" style="padding:12px 14px;">...</div><ul class="file-list" id="fileList"></ul></aside>
+          <div class="viewer"><div class="meta" id="fileMeta">...</div><pre><code id="codeView"></code></pre></div>
         </div>
       </section>
       <section class="panel chat-wrap">
-        <div class="panel-head"><h2>المحادثة</h2><div class="status" id="chatStatus">جاهز</div></div>
+        <div class="panel-head"><h2>...</h2><div class="status" id="chatStatus">...</div></div>
         <div class="messages" id="messages"></div>
-        <div class="composer"><textarea id="chatInput" placeholder="اكتب رسالتك هنا..." dir="rtl"></textarea><button id="sendBtn">إرسال</button></div>
+        <div class="composer"><textarea id="chatInput" placeholder="..." dir="rtl"></textarea><button id="sendBtn">...</button></div>
       </section>
     </main>
   </div>
   <script>
-    const TREE_URL='https://api.github.com/repos/azazugj676/riyadh-open-world-game/git/trees/main?recursive=1',RAW_BASE='https://raw.githubusercontent.com/azazugj676/riyadh-open-world-game/main/',N8N_URL='https://ttghhnjyr66.app.n8n.cloud/webhook/07f78068-5628-43c2-b902-d5e5afd305b0/chat,SESSION_KEY='ide_session_id';
+    const TREE_URL='https://api.github.com/repos/azazugj676/riyadh-open-world-game/git/trees/main?recursive=1',RAW_BASE='https://raw.githubusercontent.com/azazugj676/riyadh-open-world-game/main/',N8N_URL='https://ttghhnjyr66.app.n8n.cloud/webhook/07f78068-5628-43c2-b902-d5e5afd305b0/chat',SESSION_KEY='ide_session_id';
     const fileList=document.getElementById('fileList'),filesStatus=document.getElementById('filesStatus'),fileMeta=document.getElementById('fileMeta'),codeView=document.getElementById('codeView'),refreshFilesBtn=document.getElementById('refreshFilesBtn'),messages=document.getElementById('messages'),chatInput=document.getElementById('chatInput'),sendBtn=document.getElementById('sendBtn'),chatStatus=document.getElementById('chatStatus');
     let tree=[],activePath=''; const sessionId=localStorage.getItem(SESSION_KEY)||crypto.randomUUID(); localStorage.setItem(SESSION_KEY,sessionId);
     function addMessage(text,who='assistant',cls=''){const div=document.createElement('div');div.className=`msg ${who} ${cls}`.trim();div.textContent=text;messages.appendChild(div);messages.scrollTop=messages.scrollHeight;return div}
     function addTyping(){const div=document.createElement('div');div.className='msg assistant';div.innerHTML='<span class="typing"><span></span><span></span><span></span></span>';messages.appendChild(div);messages.scrollTop=messages.scrollHeight;return div}
-    function buildErrorMessage(prefix,status,body){return `${prefix}\nHTTP ${status}\n${body||'لا يوجد نص مُرجع'}`}
-    async function readErrorResponse(res){let body='';try{body=await res.text()}catch{}return buildErrorMessage('تعذر إكمال الطلب بسبب خطأ من GitHub.',res.status,body)}
-    async function loadTree(){filesStatus.textContent='جارٍ تحميل الملفات...';refreshFilesBtn.disabled=true;try{const res=await fetch(TREE_URL);if(!res.ok){const errorMessage=await readErrorResponse(res);filesStatus.textContent='فشل تحميل الملفات';addMessage(errorMessage,'assistant','error');if(res.status===403){addMessage('قد يكون GitHub API قد تجاوز حد الطلبات المجانية. حاول مرة أخرى بعد دقيقة.', 'assistant', 'error')}return}const data=await res.json();tree=(data.tree||[]).filter(item=>item.type==='blob'&&item.path);renderFiles();filesStatus.textContent=`تم تحميل ${tree.length} ملفًا`; }catch(err){filesStatus.textContent='فشل تحميل الملفات';addMessage(`تعذر الوصول إلى GitHub: ${err.message}`,'assistant','error')}finally{refreshFilesBtn.disabled=false}}
+    function buildErrorMessage(prefix,status,body){return `${prefix}\nHTTP ${status}\n${body||'...'}...`}
+    async function readErrorResponse(res){let body='';try{body=await res.text()}catch{}return buildErrorMessage('...',res.status,body)}
+    async function loadTree(){filesStatus.textContent='...';refreshFilesBtn.disabled=true;try{const res=await fetch(TREE_URL);if(!res.ok){const errorMessage=await readErrorResponse(res);filesStatus.textContent='...';addMessage(errorMessage,'assistant','error');if(res.status===403){addMessage('... GitHub API ... ... ...','assistant','error')}return}const data=await res.json();tree=(data.tree||[]).filter(item=>item.type==='blob'&&item.path);renderFiles();filesStatus.textContent=`${tree.length} ...`; }catch(err){filesStatus.textContent='...';addMessage(`... GitHub: ${err.message}`,'assistant','error')}finally{refreshFilesBtn.disabled=false}}
     function renderFiles(){fileList.innerHTML='';tree.sort((a,b)=>a.path.localeCompare(b.path)).forEach(item=>{const li=document.createElement('li');li.className='file';li.textContent=item.path;if(item.path===activePath)li.classList.add('active');li.addEventListener('click',()=>loadFile(item.path));fileList.appendChild(li)})}
-    async function loadFile(path){activePath=path;renderFiles();fileMeta.textContent=`عرض: ${path}`;codeView.textContent='...';try{const res=await fetch(RAW_BASE+encodeURIComponent(path));if(!res.ok){const body=await res.text().catch(()=> '');const msg=buildErrorMessage(`تعذر جلب الملف: ${path}`,res.status,body);fileMeta.textContent=path;codeView.textContent=msg;addMessage(msg,'assistant','error');return}const text=await res.text();codeView.textContent=text;fileMeta.textContent=path}catch(err){const msg=`تعذر جلب الملف: ${path}\n${err.message}`;fileMeta.textContent=path;codeView.textContent=msg;addMessage(msg,'assistant','error')}}
+    async function loadFile(path){activePath=path;renderFiles();fileMeta.textContent=`... ${path}`;codeView.textContent='...';try{const res=await fetch(RAW_BASE+encodeURIComponent(path));if(!res.ok){const body=await res.text().catch(()=> '');const msg=buildErrorMessage(`... ${path}`,res.status,body);fileMeta.textContent=path;codeView.textContent=msg;addMessage(msg,'assistant','error');return}const text=await res.text();codeView.textContent=text;fileMeta.textContent=path}catch(err){const msg=`... ${path}\n${err.message}`;fileMeta.textContent=path;codeView.textContent=msg;addMessage(msg,'assistant','error')}}
     function extractSseText(raw){const lines=raw.split(/\n+/);const parts=[];for(const line of lines){const trimmed=line.trim();if(!trimmed.startsWith('data:')) continue;const payload=trimmed.slice(5).trim();try{const item=JSON.parse(payload);const value=[item?.content,item?.output,item?.message].find(v=>typeof v==='string'&&v.trim());if(value) parts.push(value)}catch{}}return parts.join(' ')}
-    async function sendMessage(){const text=chatInput.value.trim();if(!text)return;chatInput.value='';addMessage(text,'user');const typing=addTyping();sendBtn.disabled=true;chatStatus.textContent='جارٍ الرد...';try{const res=await fetch(N8N_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'sendMessage',sessionId,chatInput:text})});const raw=await res.text();typing.remove();if(!res.ok){const msg=buildErrorMessage('فشل إرسال الرسالة إلى الخادم.',res.status,raw);addMessage(msg,'assistant','error');chatStatus.textContent='حدث خطأ';return}const parsed=extractSseText(raw);if(parsed.trim()){addMessage(parsed.trim(),'assistant');chatStatus.textContent='تم الرد'}else{addMessage(`تعذر فك رد الخادم\n${raw.slice(0,500)}`,'assistant','error');chatStatus.textContent='تعذر فك الرد'}}catch(err){typing.remove();addMessage(`تعذر الوصول إلى خادم الشات: ${err.message}`,'assistant','error');chatStatus.textContent='حدث خطأ'}finally{sendBtn.disabled=false}}
-    refreshFilesBtn.addEventListener('click',loadTree);sendBtn.addEventListener('click',sendMessage);chatInput.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage()}});addMessage('مرحبًا! اختر ملفًا من اليسار أو ابدأ محادثة مع المساعد.','assistant');loadTree();
+    async function sendMessage(){const text=chatInput.value.trim();if(!text)return;chatInput.value='';addMessage(text,'user');const typing=addTyping();sendBtn.disabled=true;chatStatus.textContent='...';try{const res=await fetch(N8N_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'sendMessage',sessionId,chatInput:text})});const raw=await res.text();typing.remove();if(!res.ok){const msg=buildErrorMessage('...',res.status,raw);addMessage(msg,'assistant','error');chatStatus.textContent='...';return}const parsed=extractSseText(raw);if(parsed.trim()){addMessage(parsed.trim(),'assistant');chatStatus.textContent='...'}else{addMessage(`تعذر فك رد الخادم: ${raw.slice(0,300)}`,'assistant','error');chatStatus.textContent='...'}}catch(err){typing.remove();addMessage(`...: ${err.message}`,'assistant','error');chatStatus.textContent='...'}finally{sendBtn.disabled=false}}
+    refreshFilesBtn.addEventListener('click',loadTree);sendBtn.addEventListener('click',sendMessage);chatInput.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();sendMessage()}});addMessage('...','assistant');loadTree();
   </script>
 </body>
 </html>
