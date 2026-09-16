@@ -1,0 +1,31 @@
+:root{
+  --bg:#0f1724;
+  --panel:#0b1220;
+  --accent:#22c1c3;
+  --text:#e6eef6;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Segoe UI, Tahoma, Arial, sans-serif;background:linear-gradient(180deg,var(--bg),#071019);color:var(--text);direction:rtl}
+
+.container{max-width:760px;margin:32px auto;padding:20px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.03);border-radius:10px}
+
+h1{margin:0 0 12px;font-size:22px;text-align:center}
+.hud{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.hud .score{font-weight:600}
+button#restart{background:var(--accent);border:none;color:#012;padding:8px 12px;border-radius:6px;cursor:pointer}
+button#restart:hover{opacity:0.9}
+
+.game-area{display:flex;justify-content:center;padding:12px}
+canvas#game{background:#071023;border:4px solid rgba(255,255,255,0.04);border-radius:6px;image-rendering:pixelated}
+
+.instructions{margin-top:14px}
+.instructions h2{margin:0 0 8px;font-size:16px}
+.instructions ul{margin:0;padding-left:18px}
+
+footer{margin-top:14px;text-align:center;color:rgba(230,238,246,0.7);font-size:13px}
+
+@media (max-width:500px){
+  .container{margin:12px}
+  canvas#game{width:320px;height:320px}
+}
