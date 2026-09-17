@@ -1,3 +1,4 @@
+// Snake Game.
 /*
 Simple Snake game (no external libraries)
         Contains: Arrow keys or WASD
@@ -111,7 +112,7 @@ function draw() {
     // draw grid (optional subtle)
     ctx.strokeStyle = 'rgba(255,255,255,0.02)';
     ctx.lineWidth = 1;
-    for (let x = 0; x < COLS; x++) {
+    for (let x = 0; x <= COLS; x++) {
         ctx.beginPath();
         ctx.moveTo(x * CELLS, 0);
         ctx.lineTo(x * CELLS, canvas.height);
