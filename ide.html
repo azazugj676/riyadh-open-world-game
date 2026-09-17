@@ -136,13 +136,18 @@ button:disabled{opacity:.5;cursor:not-allowed}
 .backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:70;display:none}
 .backdrop.open{display:block}
 @media (max-width:900px){
-  .sidebar,.ai-panel{position:fixed;top:0;bottom:0;z-index:80;transition:transform .25s;box-shadow:0 0 30px rgba(0,0,0,.5)}
-  .sidebar{left:0;transform:translateX(-100%);width:280px}
-  .ai-panel{right:0;transform:translateX(100%);width:320px}
+  /* Sidebar يبقى Drawer مخفي */
+  .sidebar{position:fixed;top:0;bottom:0;left:0;z-index:80;transform:translateX(-100%);width:280px;transition:transform .25s;box-shadow:0 0 30px rgba(0,0,0,.5)}
   .sidebar.open{transform:translateX(0)}
-  .ai-panel.open{transform:translateX(0)}
   .drawer-toggle{display:flex}
   .tb-chip.commit,.tb-chip.hide-m{display:none}
+  /* على الجوال: المحرر فوق + الشات تحت (الشات ظاهر دائمًا) */
+  .workbench{flex-direction:column}
+  .editor-area{flex:1;min-height:0}
+  .ai-panel{position:static;transform:none;width:100%;height:46vh;border-left:0;border-top:1px solid var(--border);box-shadow:0 -8px 24px rgba(0,0,0,.35);flex-shrink:0}
+  .ai-panel.open{transform:none}
+  /* زر AI على الجوال يبدل بين إظهار/إخفاء الشات */
+  .ai-panel.chat-hidden{display:none}
 }
 </style>
 </head>
@@ -537,15 +542,20 @@ async function refreshAll(){await Promise.all([loadTree(),loadCommits()]);if(act
 function setConn(ok){$('connDot').className='status-dot'+(ok?'':' off');$('connText').textContent=ok?'Connected':'Offline'}
 
 /* ================= Mobile drawers ================= */
+function isMobile(){return window.matchMedia('(max-width:900px)').matches}
 function openDrawer(which){
   closeDrawers();
-  if(which==='files')$('sidebar').classList.add('open');
-  if(which==='ai')$('aiPanel').classList.add('open');
-  $('backdrop').classList.add('open');
+  if(which==='files'){$('sidebar').classList.add('open');$('backdrop').classList.add('open');}
 }
 function closeDrawers(){$('sidebar').classList.remove('open');$('aiPanel').classList.remove('open');$('backdrop').classList.remove('open')}
 $('filesToggle').onclick=()=>openDrawer('files');
-$('aiToggle').onclick=()=>openDrawer('ai');
+$('aiToggle').onclick=()=>{
+  // على الجوال: تبديل إظهار/إخفاء الشات
+  if(isMobile()){$('aiPanel').classList.toggle('chat-hidden')}
+  else{$('aiPanel').classList.remove('chat-hidden')}
+};
+// عند تغيير حجم النافذة، أزل chat-hidden على الديسكتوب
+window.addEventListener('resize',()=>{if(!isMobile())$('aiPanel').classList.remove('chat-hidden')});
 $('backdrop').onclick=closeDrawers;
 
 /* ================= Init ================= */
