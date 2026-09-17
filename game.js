@@ -1,11 +1,10 @@
-/* Simple Snake game (no external libraries)
-   Controls: Arrow keys or WASD
-*/
+/** Simple Snake game (no external libraries)
+    Contains: Arrow keys or WASD */
 
 const canvas = document.getElementById('game');
 const ctx = canvas.getContext('2d');
 const scoreEl = document.getElementById('score');
-const restartBtn = document.getElementById('restart');
+const startBtn = document.getElementById('start');
 
 const COLS = 20;
 const ROWS = 20;
@@ -18,10 +17,10 @@ let food = null;
 let score = 0;
 let running = false;
 let gameInterval = null;
-const STEP_MS = 120; // game speed (ms per step)
+const STEP_MS = 120; // game speed (ms per tick)
 
 function init() {
-  snake = [ {x: Math.floor(COLS/2), y: Math.floor(ROWS/2) } ];
+  snake = [{x: Math.floor(COLS/2), y: Math.floor(ROWS/2)}];
   dir = {x: 1, y: 0};
   nextDir = {x: 1, y: 0};
   spawnFood();
@@ -33,13 +32,11 @@ function init() {
 }
 
 function spawnFood() {
-  while (true) {
-    const x = Math.floor(Math.random() * COLS);
-    const y = Math.floor(Math.random() * ROWS);
-    if (!snake.some(p => p.x === x && p.y === y)) {
-      food = {x, y};
-      break;
-    }
+  let x = Math.floor(Math.random() * COLS);
+  let y = Math.floor(Math.random() * ROWS);
+  if ((snake.some(p => p.x === x && p.y === y)) ) {
+    food = {x, y};
+    return;
   }
 }
 
@@ -82,21 +79,20 @@ function gameOver() {
   running = false;
   if (gameInterval) clearInterval(gameInterval);
   // draw final state with overlay
-  draw();
   ctx.fillStyle = 'rgba(0,0,0,0.5)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = '#fff';
   ctx.font = '20px sans-serif';
   ctx.textAlign = 'center';
-  ctx.fillText('انتهت اللعبة! النتيجة: ' + score, canvas.width/2, canvas.height/2 - 10);
+  ctx.fillText(score, canvas.width/2, canvas.height/2 - 10);
   ctx.font = '14px sans-serif';
-  ctx.fillText('اضغط إعادة التشغيل للبدء مجدداً', canvas.width/2, canvas.height/2 + 16);
+  ctx.fillText('Press Enter to restart', canvas.width/2, canvas.height/2 + 14);
 }
 
 function draw() {
   // clear
   ctx.fillStyle = '#071023';
-  ctx.fillRect(0,0,canvas.width,canvas.height);
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   // draw food
   if (food) {
@@ -107,11 +103,11 @@ function draw() {
   // draw snake
   for (let i = 0; i < snake.length; i++) {
     const p = snake[i];
-    ctx.fillStyle = i === 0 ? '#22c1c3' : '#70e1e2';
+    ctx.fillStyle = i === 0 ? '#22c3c3' : '#70e1e2';
     drawCell(p.x, p.y);
   }
 
-  // draw grid (optional subtle)
+  // draw grid (optional subte)
   ctx.strokeStyle = 'rgba(255,255,255,0.02)';
   ctx.lineWidth = 1;
   for (let x = 0; x <= COLS; x++) {
@@ -142,14 +138,13 @@ window.addEventListener('keydown', (e) => {
   else if (key === 'ArrowRight' || key === 'd' || key === 'D') nd = {x:1, y:0};
 
   if (nd) {
-    // prevent reversing directly
+    // prevent reversing direction
     if (snake.length > 1 && nd.x === -dir.x && nd.y === -dir.y) return;
     nextDir = nd;
-    e.preventDefault();
   }
 });
 
-restartBtn.addEventListener('click', () => {
+startBtn.addEventListener('click', () => {
   init();
 });
 
