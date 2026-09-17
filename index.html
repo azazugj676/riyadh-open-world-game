@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -8,29 +8,44 @@
 </head>
 <body>
   <main class="container">
-    <h1>لعبة الثعبان (Snake)</h1>
+    <h1>🐍 لعبة الثعبان (Snake)</h1>
 
     <div class="hud">
-      <div class="score">النتيجة: <span id="score">0</span></div>
-      <button id="restart">إعادة التشغيل</button>
+      <div class="score-board">
+        <div class="score">النتيجة: <span id="score">0</span></div>
+        <div class="high-score">أعلى نتيجة: <span id="high-score">0</span></div>
+      </div>
+      <button id="restart">إعادة التشغيل 🔄</button>
     </div>
 
     <div class="game-area">
       <canvas id="game" width="400" height="400"></canvas>
     </div>
 
+    <!-- عناصر التحكم باللمس للهواتف -->
+    <div class="mobile-controls">
+      <div class="dpad">
+        <button id="btn-up" class="ctrl-btn" aria-label="أعلى">▲</button>
+        <div class="dpad-row">
+          <button id="btn-left" class="ctrl-btn" aria-label="يسار">◄</button>
+          <button id="btn-right" class="ctrl-btn" aria-label="يمين">►</button>
+        </div>
+        <button id="btn-down" class="ctrl-btn" aria-label="أسفل">▼</button>
+      </div>
+    </div>
+
     <section class="instructions">
-      <h2>كيفية اللعب</h2>
+      <h2>كيف تلعب؟</h2>
       <ul>
-        <li>حرك الثعبان باستعمال مفاتيح الأسهم أو W A S D</li>
-        <li>كل طعام تأكله يزيد طول الثعبان ويمكنك من الحصول على نقاط</li>
-        <li>لا تصطدم بجدار اللعبة أو بجسم الثعبان نفسه</li>
-        <li>اضغط "إعادة التشغيل" لبدء لعبة جديدة</li>
+        <li>حرك الثعبان باستخدام الأسهم ⬆️ ⬇️ ⬅️ ➡️ أو أزرار W A S D أو بالسحب على الشاشة.</li>
+        <li>كل تفاحة تأكلها تزيد طول الثعبان وتمنحك نقاطاً (التفاحة الذهبية 🌟 = 3 نقاط).</li>
+        <li>تجنب الاصطدام بالجدران أو بجسم الثعبان.</li>
+        <li>اضغط زر "المسافة" (Space) لإيقاف اللعبة مؤقتاً.</li>
       </ul>
     </section>
 
     <footer>
-      <p>لعبة بسيطة مصنوعة بـ HTML و CSS و JavaScript فقط.</p>
+      <p>لعبة الثعبان مصممة بـ HTML و CSS و JavaScript.</p>
     </footer>
   </main>
 
